@@ -1,0 +1,40 @@
+# Backend
+fastapi>=0.95.0
+uvicorn>=0.21.1
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.6
+aiofiles>=23.1.0
+
+# Base de datos
+sqlalchemy>=2.0.0,<3.0.0
+databases[sqlite]>=0.7.0
+alembic>=1.10.3
+
+# IA APIs
+openai>=1.0.0
+google-generativeai>=0.3.0
+python-dotenv>=1.0.0
+
+# Comunicación
+twilio>=8.0.0
+sendgrid>=6.0.0
+email-validator>=2.0.0
+
+# Seguridad
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.6
+
+# Desarrollo
+pytest>=7.0.0
+pytest-asyncio>=0.20.0
+black>=23.0.0
+isort>=5.0.0
+mypy>=1.0.0
+pylint>=3.0.0
+
+# Documentación
+fastapi-cli>=0.0.4
+mkdocs>=1.5.0
+mkdocs-material>=9.0.0

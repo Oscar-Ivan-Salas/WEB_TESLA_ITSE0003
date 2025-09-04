@@ -1,0 +1,660 @@
+#!/usr/bin/env python3
+import os
+import sys
+
+def create_tesla_project():
+    """Crea el proyecto Tesla completo y funcional"""
+    
+    # Configurar la codificación de salida a UTF-8
+    if sys.stdout.encoding != 'utf-8':
+        sys.stdout.reconfigure(encoding='utf-8')
+    
+    try:
+        # Crear estructura de directorios
+        os.makedirs("tesla_complete/frontend", exist_ok=True)
+        os.makedirs("tesla_complete/backend", exist_ok=True)
+        
+        # Escribir archivo HTML
+        write_html_file()
+        
+        # Escribir archivos del backend
+        write_backend_files()
+        
+        print("✅ Proyecto Tesla generado exitosamente!")
+        print("\n🚀 Para ejecutar:")
+        print("   cd tesla_complete")
+        print("   python -m http.server 8000  # Para el frontend")
+        print("   cd backend && python main.py  # Para el backend")
+        
+        return True
+        
+    except Exception as e:
+        print(f"❌ Error al crear el proyecto: {e}")
+        return False
+
+def write_html_file():
+    """Escribe el archivo HTML del frontend"""
+    html_content = """<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Electricidad - Energía Inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Estilos del encabezado */
+        .header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--highlight);
+        }
+        
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav a:hover {
+            color: var(--highlight);
+        }
+        
+        /* Estilos de la sección hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--highlight);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Estilos del chatbot */
+        .chatbot {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .chatbot-toggle {
+            background: var(--highlight);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-window.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .chatbot-header {
+            background: var(--accent);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        
+        .message {
+            margin-bottom: 1rem;
+            max-width: 80%;
+            padding: 0.8rem 1rem;
+            border-radius: 15px;
+            line-height: 1.4;
+        }
+        
+        .user {
+            background: #e3f2fd;
+            color: #0d47a1;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot {
+            background: #f5f5f5;
+            color: #333;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            outline: none;
+            font-family: inherit;
+        }
+        
+        .chatbot-input button {
+            background: var(--highlight);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-input button:hover {
+            transform: rotate(15deg);
+        }
+        
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .chatbot-window {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                Tesla Electricidad
+            </div>
+            <nav class="nav">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#contacto">Contacto</a>
+                <a href="#" class="btn" onclick="openChat()">Chatea con nosotros</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Soluciones Eléctricas Inteligentes</h1>
+            <p>Especialistas en instalaciones eléctricas, mantenimiento y automatización para hogares y empresas.</p>
+            <a href="#contacto" class="btn">Solicitar Cotización</a>
+        </div>
+    </section>
+
+    <!-- Chatbot -->
+    <div class="chatbot">
+        <button class="chatbot-toggle" onclick="toggleChat()">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <div class="chatbot-window" id="chatWindow">
+            <div class="chatbot-header">
+                <h4>Tesla Electricidad - Asistente</h4>
+                <p>¿En qué podemos ayudarte hoy?</p>
+            </div>
+            <div class="chatbot-messages" id="messages">
+                <div class="message bot">
+                    ¡Hola! Soy el asistente virtual de Tesla Electricidad. ¿En qué puedo ayudarte hoy?
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="userInput" placeholder="Escribe tu mensaje..." onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        const API_URL = 'http://localhost:8000';
+        let chatOpen = false;
+        
+        // Funciones del chatbot
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatOpen = !chatOpen;
+            
+            if (chatOpen) {
+                chatWindow.classList.add('active');
+                document.getElementById('userInput').focus();
+            } else {
+                chatWindow.classList.remove('active');
+            }
+        }
+        
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            
+            if (message === '') return;
+            
+            // Mostrar mensaje del usuario
+            addMessage('user', message);
+            userInput.value = '';
+            
+            // Simular respuesta del bot (será reemplazado por la API real)
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage('bot', response);
+            }, 500);
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function addMessage(sender, content) {
+            const messages = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = content;
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Respuestas predefinidas
+            if (lowerMessage.includes('hola') || lowerMessage.includes('buenos días') || lowerMessage.includes('buenas tardes')) {
+                return '¡Hola! Soy el asistente de Tesla Electricidad. ¿En qué puedo ayudarte hoy?';
+            } else if (lowerMessage.includes('servicio') || lowerMessage.includes('qué ofrecen')) {
+                return 'Ofrecemos servicios de instalaciones eléctricas, mantenimiento, certificaciones y automatización para hogares y empresas. ¿Te gustaría más información sobre algún servicio en particular?';
+            } else if (lowerMessage.includes('precio') || lowerMessage.includes('cuánto cuesta')) {
+                return 'Los precios varían según el servicio y las necesidades específicas. ¿Podrías contarme más sobre lo que necesitas para poder darte una cotización más precisa?';
+            } else if (lowerMessage.includes('contacto') || lowerMessage.includes('dónde están') || lowerMessage.includes('teléfono')) {
+                return 'Puedes contactarnos al teléfono +51 906 315 961 o escribirnos a info@teslaelectricidad.com. Estamos ubicados en Huancayo, Perú. También puedes visitar nuestra sección de contacto en la página para más información.';
+            } else if (lowerMessage.includes('horario') || lowerMessage.includes('atención')) {
+                return 'Nuestro horario de atención es de lunes a viernes de 9:00 AM a 6:00 PM y sábados de 9:00 AM a 1:00 PM.';
+            } else if (lowerMessage.includes('gracias') || lowerMessage.includes('muchas gracias')) {
+                return '¡De nada! Si tienes más preguntas, no dudes en consultarme. Estoy aquí para ayudarte.';
+            } else {
+                return 'Gracias por tu mensaje. Un asesor se pondrá en contacto contigo pronto para atender tu consulta. ¿Hay algo más en lo que pueda ayudarte?';
+            }
+        }
+        
+        // Abrir chat al hacer clic en el botón de la navegación
+        function openChat() {
+            if (!chatOpen) {
+                toggleChat();
+            }
+        }
+    </script>
+</body>
+</html>"""
+    
+    try:
+        with open("tesla_complete/frontend/index.html", "w", encoding="utf-8") as f:
+            f.write(html_content)
+        print("✅ Archivo HTML creado exitosamente")
+    except Exception as e:
+        print(f"❌ Error al crear el archivo HTML: {e}")
+        raise
+
+def write_backend_files():
+    """Escribe los archivos del backend"""
+    # Crear archivo requirements.txt
+    requirements = """fastapi==0.68.0
+uvicorn==0.15.0
+python-multipart==0.0.5
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-dotenv==0.19.0
+sqlalchemy==1.4.23
+pydantic==1.8.2
+"""
+    
+    try:
+        with open("tesla_complete/backend/requirements.txt", "w", encoding="utf-8") as f:
+            f.write(requirements)
+        print("✅ Archivo requirements.txt creado exitosamente")
+    except Exception as e:
+        print(f"❌ Error al crear requirements.txt: {e}")
+        raise
+    
+    # Crear archivo main.py
+    main_py = """from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import Optional, List
+import sqlite3
+import os
+from datetime import datetime
+
+# Configuración de la aplicación
+app = FastAPI(title="Tesla Electricidad API")
+
+# Configuración de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Modelos de datos
+class Message(BaseModel):
+    content: str
+    sender: str = "user"
+    timestamp: Optional[str] = None
+
+# Base de datos SQLite
+def get_db_connection():
+    conn = sqlite3.connect('tesla_electricidad.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def init_db():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Crear tabla de mensajes si no existe
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        content TEXT NOT NULL,
+        sender TEXT NOT NULL,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+    ''')
+    
+    conn.commit()
+    conn.close()
+
+# Inicializar la base de datos al iniciar
+init_db()
+
+# Rutas de la API
+@app.get("/")
+async def read_root():
+    return {"message": "Bienvenido a la API de Tesla Electricidad"}
+
+@app.post("/api/messages")
+async def create_message(message: Message):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Insertar mensaje en la base de datos
+    cursor.execute(
+        'INSERT INTO messages (content, sender) VALUES (?, ?)',
+        (message.content, message.sender)
+    )
+    
+    # Obtener la respuesta del bot
+    bot_response = get_bot_response(message.content)
+    
+    # Guardar la respuesta del bot
+    cursor.execute(
+        'INSERT INTO messages (content, sender) VALUES (?, ?)',
+        (bot_response, 'bot')
+    )
+    
+    conn.commit()
+    conn.close()
+    
+    return {"message": bot_response, "sender": "bot"}
+
+def get_bot_response(message: str) -> str:
+    """Genera una respuesta del bot basada en el mensaje del usuario"""
+    lower_message = message.lower()
+    
+    if any(word in lower_message for word in ['hola', 'buenos días', 'buenas tardes']):
+        return '¡Hola! Soy el asistente de Tesla Electricidad. ¿En qué puedo ayudarte hoy?'
+    elif any(word in lower_message for word in ['servicio', 'qué ofrecen', 'qué hacen']):
+        return 'Ofrecemos servicios de instalaciones eléctricas, mantenimiento, certificaciones y automatización para hogares y empresas. ¿Te gustaría más información sobre algún servicio en particular?'
+    elif any(word in lower_message for word in ['precio', 'cuánto cuesta', 'cotización']):
+        return 'Los precios varían según el servicio y las necesidades específicas. ¿Podrías contarme más sobre lo que necesitas para poder darte una cotización más precisa?'
+    elif any(word in lower_message for word in ['contacto', 'dónde están', 'teléfono', 'email']):
+        return 'Puedes contactarnos al teléfono +51 906 315 961 o escribirnos a info@teslaelectricidad.com. Estamos ubicados en Huancayo, Perú.'
+    elif any(word in lower_message for word in ['horario', 'atención', 'abierto']):
+        return 'Nuestro horario de atención es de lunes a viernes de 9:00 AM a 6:00 PM y sábados de 9:00 AM a 1:00 PM.'
+    elif any(word in lower_message for word in ['gracias', 'muchas gracias']):
+        return '¡De nada! Si tienes más preguntas, no dudes en consultarme. Estoy aquí para ayudarte.'
+    else:
+        return 'Gracias por tu mensaje. Un asesor se pondrá en contacto contigo pronto para atender tu consulta. ¿Hay algo más en lo que pueda ayudarte?'
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+"""
+    
+    try:
+        with open("tesla_complete/backend/main.py", "w", encoding="utf-8") as f:
+            f.write(main_py)
+        print("✅ Archivo main.py creado exitosamente")
+    except Exception as e:
+        print(f"❌ Error al crear main.py: {e}")
+        raise
+    
+    # Crear README.md
+    readme = """# Tesla Electricidad
+
+Proyecto web para Tesla Electricidad, especialistas en instalaciones eléctricas, mantenimiento y automatización.
+
+## Estructura del Proyecto
+
+```
+tesla_complete/
+├── frontend/
+│   └── index.html      # Aplicación web del frontend
+└── backend/
+    ├── main.py         # API de FastAPI
+    └── requirements.txt # Dependencias de Python
+```
+
+## Requisitos
+
+- Python 3.8+
+- Node.js y npm (opcional, para desarrollo frontend)
+
+## Configuración
+
+1. Crear un entorno virtual:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # En Windows: venv\Scripts\activate
+   ```
+
+2. Instalar dependencias del backend:
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   ```
+
+## Ejecución
+
+### Backend
+
+```bash
+cd backend
+python main.py
+```
+
+El servidor de desarrollo estará disponible en `http://localhost:8000`
+
+### Frontend
+
+Puedes usar cualquier servidor web estático. Por ejemplo, con Python:
+
+```bash
+cd frontend
+python -m http.server 3000
+```
+
+Luego abre `http://localhost:3000` en tu navegador.
+
+## API Endpoints
+
+- `GET /`: Página de bienvenida
+- `POST /api/messages`: Enviar y recibir mensajes del chat
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT.
+"""
+    
+    try:
+        with open("tesla_complete/README.md", "w", encoding="utf-8") as f:
+            f.write(readme)
+        print("✅ Archivo README.md creado exitosamente")
+    except Exception as e:
+        print(f"❌ Error al crear README.md: {e}")
+        raise
+
+if __name__ == "__main__":
+    create_tesla_project()

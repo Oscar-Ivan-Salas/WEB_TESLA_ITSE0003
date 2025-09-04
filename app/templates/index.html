@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TESLA ELECTRICIDAD Y AUTOMATIZACIÓN S.A.C - Energía Inteligente para Huancayo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section with Dynamic Background */
+        .hero {
+            background: linear-gradient(135deg, rgba(0,51,102,0.9) 0%, rgba(0,64,128,0.8) 50%, rgba(0,102,204,0.9) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0,204,255,0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.02) 50%, transparent 70%);
+            animation: dynamicBackground 15s ease-in-out infinite;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.3)" filter="url(%23glow)"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite"/></circle><circle cx="150" cy="80" r="2" fill="rgba(0,204,255,0.4)" filter="url(%23glow)"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="6s" repeatCount="indefinite"/></circle><circle cx="100" cy="150" r="2.5" fill="rgba(255,255,255,0.2)" filter="url(%23glow)"><animate attributeName="opacity" values="0.2;0.7;0.2" dur="5s" repeatCount="indefinite"/></circle></svg>');
+            animation: floatParticles 20s infinite linear;
+        }
+        
+        @keyframes dynamicBackground {
+            0%, 100% { 
+                background: 
+                    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(0,204,255,0.2) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            }
+            33% { 
+                background: 
+                    radial-gradient(circle at 70% 40%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 30% 70%, rgba(0,204,255,0.25) 0%, transparent 50%),
+                    radial-gradient(circle at 90% 10%, rgba(255,255,255,0.08) 0%, transparent 50%);
+            }
+            66% { 
+                background: 
+                    radial-gradient(circle at 10% 80%, rgba(255,255,255,0.12) 0%, transparent 50%),
+                    radial-gradient(circle at 90% 30%, rgba(0,204,255,0.18) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.06) 0%, transparent 50%);
+            }
+        }
+        
+        @keyframes floatParticles {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-button {
+            background: #FF0000;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-button:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+        }
+        
+        /* --- START: New Dynamic Dashboard Styles --- */
+        .dashboard {
+            background: #f0f4f8;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .month-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .month-btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            background: white;
+            color: #003366;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .month-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .month-btn.active {
+            background: #003366;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 51, 102, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .dynamic-dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-auto-flow: dense;
+            gap: 30px;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 51, 102, 0.1);
+            animation: fadeIn 0.5s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dashboard-card h3 {
+            color: #003366;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+        }
+
+        /* Main Chart Card */
+        .main-chart-card {
+            grid-column: span 2;
+        }
+        @media (max-width: 992px) {
+            .main-chart-card {
+                grid-column: span 1;
+            }
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            flex-grow: 1;
+        }
+        .chart {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 100%;
+            border-left: 2px solid #e0e0e0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-top: 10px;
+        }
+       
+        .chart-bar {
+            width: 40px;
+            transition: height 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border-radius: 5px 5px 0 0;
+        }
+        .chart-bar .tooltip {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .chart-bar:hover .tooltip {
+            opacity: 1;
+        }
+        /* Service-specific colors */
+        .chart-bar[data-service="itse"] { background: linear-gradient(180deg, #007bff, #0056b3); }
+        .chart-bar[data-service="pozo"] { background: linear-gradient(180deg, #28a745, #1e7e34); }
+        .chart-bar[data-service="mant"] { background: linear-gradient(180deg, #ffc107, #d39e00); }
+        .chart-bar[data-service="inc"] { background: linear-gradient(180deg, #dc3545, #b02a37); }
+
+        .chart-labels {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 10px;
+        }
+         .chart-labels span {
+            font-weight: 600;
+            color: #666;
+            font-size: 0.9rem;
+            text-align: center;
+            width: 60px;
+        }
+        
+        /* KPI Card */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+            flex-grow: 1;
+            align-content: center;
+        }
+        .kpi-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .kpi-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #003366;
+        }
+        .kpi-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* --- END: New Dynamic Dashboard Styles --- */
+        
+        /* Services Section with Photo Galleries */
+        .services {
+            padding: 80px 0;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services h2 {
+            text-align: center;
+            color: #003366;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .service-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #003366;
+            box-shadow: 0 15px 30px rgba(0, 51, 102, 0.2);
+        }
+        
+        /* New Service Photo Gallery with 3 images */
+        .service-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 8px;
+            margin: 0 auto 25px;
+            width: 240px;
+            height: 200px;
+        }
+
+        .service-photo {
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #003366;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-photo:hover {
+            transform: scale(1.05);
+            border-color: #0066cc;
+            box-shadow: 0 5px 15px rgba(0,51,102,0.3);
+        }
+
+        .service-photo:nth-child(1) {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+        }
+        .service-photo:nth-child(2) {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+        .service-photo:nth-child(3) {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+        
+        .service-card h3 {
+            color: #003366;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        /* Chatbot Section */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+            animation: slideIn 0.5s ease;
+        }
+        .user-message > div:first-child {
+            background: #25d366;
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 5px 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 80%;
+        }
+        .user-message > div:last-child {
+             width: 35px; height: 35px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0;
+        }
+        
+        /* Contact Form */
+        .contact {
+            background: linear-gradient(135deg, rgba(0,51,102,0.9) 0%, rgba(0,64,128,0.8) 50%, rgba(0,102,204,0.9) 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 1rem; background: rgba(255, 255, 255, 0.9); color: #333;
+        }
+        .form-group textarea { height: 120px; resize: vertical; }
+        .submit-btn {
+            background: #FF0000; color: white; padding: 15px 40px; border: none; border-radius: 50px; font-size: 1.1rem;
+            font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s ease;
+        }
+        .submit-btn:hover { background: #cc0000; transform: translateY(-2px); }
+        
+        /* Footer */
+        .footer { background: #001a33; color: white; padding: 60px 0 20px 0; }
+        .footer-content {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px; margin-bottom: 40px; text-align: left;
+        }
+        .footer h3 { color: #FF0000; margin-bottom: 15px; font-weight: 600; }
+        .footer p, .footer a { opacity: 0.8; line-height: 1.6; color: white; text-decoration: none; }
+        .footer a:hover { opacity: 1; text-decoration: underline; }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem; }
+        
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366;
+            color: white; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999;
+            z-index: 100; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; text-decoration: none;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .services-grid, .dynamic-dashboard-grid { grid-template-columns: 1fr; }
+            .footer-content { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Expertos en Seguridad Eléctrica y Certificación ITSE</h1>
+            <p>Garantizamos la operatividad y legalidad de tu negocio en Huancayo.</p>
+            <a href="#contact" class="cta-button">Cotizar ahora ⚡</a>
+        </div>
+    </section>
+
+    <!-- NEW DYNAMIC DASHBOARD -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <h2 style="color: #003366; text-align: center; font-size: 2.8rem; margin-bottom: 20px; font-weight: 700;">Nuestro Crecimiento Exitoso en 2025</h2>
+            <p style="text-align: center; color: #555; max-width: 700px; margin: 0 auto 50px;">Simulación de nuestro rendimiento operativo. Cada mes superamos nuestras metas gracias a la confianza de clientes como tú. Selecciona un mes para ver los detalles.</p>
+            
+            <div class="month-selector" id="monthSelector">
+                <!-- Month buttons will be generated by JavaScript -->
+            </div>
+    
+            <div class="dynamic-dashboard-grid">
+                <!-- Main Chart Card - Changed to show services per month -->
+                <div class="dashboard-card main-chart-card">
+                    <h3>Servicios Realizados (<span id="currentMonthLabelChart">Agosto</span>)</h3>
+                    <div class="chart-container">
+                        <div class="chart" id="mainChart">
+                            <!-- Chart bars for services will be generated by JavaScript -->
+                        </div>
+                        <div class="chart-labels" id="chartLabels">
+                             <!-- Service labels will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Key Metrics - Changed to remove revenue -->
+                <div class="dashboard-card kpi-card">
+                    <h3>Métricas Clave (<span id="currentMonthLabelKPI">Agosto</span>)</h3>
+                    <div class="kpi-grid">
+                        <div class="kpi">
+                            <div class="kpi-icon">👥</div>
+                            <div class="kpi-value" id="newClients">0</div>
+                            <div class="kpi-label">Nuevos Clientes</div>
+                        </div>
+                        <div class="kpi">
+                            <div class="kpi-icon">🛠️</div>
+                            <div class="kpi-value" id="totalServices">0</div>
+                            <div class="kpi-label">Servicios Totales</div>
+                        </div>
+                        <div class="kpi">
+                             <div class="kpi-icon">⭐</div>
+                            <div class="kpi-value" id="clientSatisfaction">0%</div>
+                            <div class="kpi-label">Satisfacción</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2>Nuestros Servicios Especializados</h2>
+            <div class="services-grid">
+                
+                <div class="service-card">
+                    <div class="service-gallery">
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1543286386-713bdd548da4?w=300&h=400&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1554494541-34d7d1a25883?w=200&h=200&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=200&h=200&fit=crop');"></div>
+                    </div>
+                    <h3>📋 Certificado ITSE</h3>
+                    <p>Gestión completa para la Inspección Técnica de Seguridad en Edificaciones, indispensable para tu licencia de funcionamiento. Nos encargamos de todo el proceso para tu tranquilidad.</p>
+                </div>
+                
+                <div class="service-card">
+                     <div class="service-gallery">
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=300&h=400&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=200&h=200&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1601131498642-7208d13b4697?w=200&h=200&fit=crop');"></div>
+                    </div>
+                    <h3>⚡ Pozo de Tierra</h3>
+                    <p>Instalación y mantenimiento de sistemas de puesta a tierra para proteger tus equipos y, lo más importante, a tu personal contra fallas eléctricas y descargas.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-gallery">
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=400&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=200&h=200&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1579483324903-bdf25585c54c?w=200&h=200&fit=crop');"></div>
+                    </div>
+                    <h3>🔧 Mantenimiento Eléctrico</h3>
+                    <p>Planes de mantenimiento preventivo y correctivo para instalaciones comerciales e industriales. Evita paradas inesperadas y maximiza la productividad de tu negocio.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-gallery">
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1561053913-5a7e6be95754?w=300&h=400&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=200&h=200&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1609220136736-443140cffec6?w=200&h=200&fit=crop');"></div>
+                    </div>
+                    <h3>🧯 Sistema Contra Incendios</h3>
+                    <p>Diseño e instalación de sistemas de detección y alarma de incendios, cumpliendo con las normativas de seguridad vigentes para proteger tu inversión y salvar vidas.</p>
+                </div>
+                
+                <div class="service-card">
+                   <div class="service-gallery">
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&h=400&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1614757329973-9a3d49c69316?w=200&h=200&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1596043534923-a2c6b0394862?w=200&h=200&fit=crop');"></div>
+                    </div>
+                    <h3>📊 Diseño de Tableros</h3>
+                    <p>Fabricación de tableros eléctricos de control y distribución, personalizados para las necesidades específicas de tu operación, garantizando eficiencia y seguridad.</p>
+                </div>
+                
+                <div class="service-card">
+                     <div class="service-gallery">
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1580920469275-fc7f52f43168?w=300&h=400&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1617045483163-3e3a9a7a6e6e?w=200&h=200&fit=crop');"></div>
+                        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1621905252472-e8ace315ad65?w=200&h=200&fit=crop');"></div>
+                    </div>
+                    <h3>🛒 Venta de Suministros</h3>
+                    <p>Contamos con un amplio stock de materiales eléctricos de alta calidad para tus proyectos: cables, interruptores y componentes de las mejores marcas del mercado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Chatbot Section -->
+    <section class="chatbot-section" style="background: linear-gradient(135deg, rgba(0,51,102,0.95) 0%, rgba(0,64,128,0.95) 100%); padding: 80px 0; position: relative; overflow: hidden;">
+        <div class="container">
+            <h2 style="text-align: center; color: white; font-size: 2.5rem; margin-bottom: 20px; font-weight: 700;">🤖 TeslaBot - Asistente Inteligente 24/7</h2>
+            <p style="text-align: center; color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 50px;">El chatbot más avanzado del sector eléctrico en Perú</p>
+            
+            <div class="chatbot-container" style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); overflow: hidden; display: flex; flex-direction: column;">
+                <div class="chat-header" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; padding: 20px; display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">🤖</div>
+                    <div>
+                        <h3 style="margin: 0; font-size: 1.3rem;">TeslaBot</h3>
+                        <p style="margin: 0; opacity: 0.8; font-size: 0.9rem;">🟢 En línea - Respuesta inmediata</p>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages" style="height: 400px; overflow-y: auto; padding: 20px; background: #f8f9fa; flex-grow: 1;">
+                    <div class="message bot-message" style="display: flex; gap: 10px; margin-bottom: 20px; animation: slideIn 0.5s ease;">
+                        <div style="width: 35px; height: 35px; background: #003366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0;">🤖</div>
+                        <div style="background: white; padding: 15px; border-radius: 15px 15px 15px 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 80%;">
+                            <p style="margin: 0; color: #333;">👋 ¡Hola! Soy <strong>TeslaBot</strong>, tu asistente eléctrico inteligente.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="message bot-message" style="display: flex; gap: 10px; margin-bottom: 20px; animation: slideIn 0.7s ease;">
+                        <div style="width: 35px; height: 35px; background: #003366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0;">⚡</div>
+                        <div style="background: white; padding: 15px; border-radius: 15px 15px 15px 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 80%;">
+                            <p style="margin: 0 0 15px 0; color: #333;">¿Sobre qué servicio te gustaría recibir información y precios referenciales?</p>
+                            <div class="chat-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+                                <button onclick="selectService('itse')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">📋 ITSE</button>
+                                <button onclick="selectService('pozo')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">⚡ Pozo Tierra</button>
+                                <button onclick="selectService('mantenimiento')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">🔧 Mantenimiento</button>
+                                <button onclick="selectService('incendios')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">🧯 Contra Incendios</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-area" style="padding: 20px; background: white; border-top: 1px solid #eee;">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="text" id="chatInput" placeholder="Escribe tu mensaje aquí..." style="flex: 1; padding: 12px; border: 2px solid #e9ecef; border-radius: 25px; font-size: 1rem; outline: none; transition: border-color 0.3s ease;" onkeypress="handleEnter(event)">
+                        <button onclick="sendMessage()" style="background: #25d366; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.3s ease;">📤</button>
+                    </div>
+                     <div style="text-align: center; margin-top: 10px;">
+                       <button onclick="startWhatsAppChat()" style="background: #25d366; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease;">💬 Continuar en WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Solicita tu Cotización</h2>
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono / WhatsApp</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Servicio de Interés</label>
+                        <select id="service" name="service">
+                            <option value="itse">Certificado ITSE</option>
+                            <option value="pozo_tierra">Pozo de Tierra</option>
+                            <option value="mantenimiento">Mantenimiento Eléctrico</option>
+                            <option value="incendios">Sistema Contra Incendios</option>
+                            <option value="tableros">Diseño de Tableros</option>
+                            <option value="suministros">Venta de Suministros</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Cotización</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Sobre Nosotros</h3>
+                    <p>TESLA ELECTRICIDAD Y AUTOMATIZACIÓN S.A.C. es una empresa líder en Huancayo, dedicada a ofrecer soluciones eléctricas seguras, eficientes y con la más alta calidad.</p>
+                </div>
+                 <div>
+                    <h3>Nuestros Servicios</h3>
+                    <p>
+                        <a href="#contact">Certificado ITSE</a><br>
+                        <a href="#contact">Pozos de Tierra</a><br>
+                        <a href="#contact">Mantenimiento Eléctrico</a><br>
+                        <a href="#contact">Sistemas Contra Incendios</a>
+                    </p>
+                </div>
+                <div>
+                    <h3>Contacto</h3>
+                    <p>
+                        Dirección: Jr. los Narcisos Mz H lote 4. Urb. San Carlos, Huancayo, Perú<br>
+                        WhatsApp: <a href="https://api.whatsapp.com/send?phone=51906315961" target="_blank">+51 906 315 961</a><br>
+                        Email: <a href="mailto:contacto@tesla-electricidad.pe">contacto@tesla-electricidad.pe</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TESLA ELECTRICIDAD Y AUTOMATIZACIÓN S.A.C. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- WhatsApp Floating Button -->
+    <a href="https://api.whatsapp.com/send?phone=51906315961&text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20necesito%20una%20cotizaci%C3%B3n." class="whatsapp-float" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 28px; height: 28px; fill: white;"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.8 0-67.6-9.5-97.8-27.2l-11.4-6.8-70.6 18.3L76 372.4l-7.1-11.9c-19.6-32.8-31.5-71.4-31.5-112.7 0-108.7 88.4-197.1 197.1-197.1 53 0 102.8 20.7 139.4 57.4 36.6 36.6 57.4 86.4 57.4 139.4-.1 108.7-88.5 197.2-197.2 197.2zM224 132.9c-5.5 0-9.9 4.4-9.9 9.9v77.3c0 5.5 4.4 9.9 9.9 9.9h77.3c5.5 0 9.9-4.4 9.9-9.9s-4.4-9.9-9.9-9.9h-67.4v-67.4c0-5.5-4.4-9.9-9.9-9.9z"/></svg>
+    </a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago"];
+            const fullMonthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto"];
+            const serviceKeys = {
+                itse: "ITSE",
+                pozo: "Pozos",
+                mant: "Mantenim.",
+                inc: "Incendios"
+            };
+
+            const monthlyData = [
+                { clients: 5, satisfaction: 92, services: { itse: 2, pozo: 3, mant: 10, inc: 1 } },
+                { clients: 6, satisfaction: 93, services: { itse: 3, pozo: 4, mant: 11, inc: 2 } },
+                { clients: 8, satisfaction: 94, services: { itse: 4, pozo: 5, mant: 14, inc: 2 } },
+                { clients: 7, satisfaction: 95, services: { itse: 5, pozo: 5, mant: 15, inc: 3 } },
+                { clients: 8, satisfaction: 95, services: { itse: 6, pozo: 3, mant: 15, inc: 4 } },
+                { clients: 10, satisfaction: 96, services: { itse: 7, pozo: 6, mant: 18, inc: 5 } },
+                { clients: 12, satisfaction: 97, services: { itse: 8, pozo: 7, mant: 20, inc: 7 } },
+                { clients: 15, satisfaction: 98, services: { itse: 9, pozo: 8, mant: 22, inc: 8 } },
+            ];
+
+            const monthSelector = document.getElementById('monthSelector');
+            const mainChart = document.getElementById('mainChart');
+            const chartLabels = document.getElementById('chartLabels');
+            const maxServicesInMonth = Math.max(...monthlyData.flatMap(month => Object.values(month.services)));
+
+            function animateValue(element, start, end, duration, prefix = '', suffix = '') {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    element.innerHTML = prefix + Math.floor(progress * (end - start) + start).toLocaleString('es-PE') + suffix;
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            function updateDashboard(monthIndex) {
+                const data = monthlyData[monthIndex];
+                const totalServices = Object.values(data.services).reduce((a, b) => a + b, 0);
+                document.querySelectorAll('.month-btn').forEach((btn, idx) => btn.classList.toggle('active', idx === monthIndex));
+                const currentMonthName = fullMonthNames[monthIndex];
+                document.getElementById('currentMonthLabelChart').textContent = currentMonthName;
+                document.getElementById('currentMonthLabelKPI').textContent = currentMonthName;
+                animateValue(document.getElementById('newClients'), 0, data.clients, 800);
+                animateValue(document.getElementById('totalServices'), 0, totalServices, 800);
+                animateValue(document.getElementById('clientSatisfaction'), 0, data.satisfaction, 800, '', '%');
+                Object.keys(data.services).forEach(key => {
+                    const bar = document.querySelector(`.chart-bar[data-service="${key}"]`);
+                    const value = data.services[key];
+                    bar.style.height = (value / maxServicesInMonth * 100) + '%';
+                    bar.querySelector('.tooltip').textContent = `${value} Servicios`;
+                });
+            }
+
+            function initializeDashboard() {
+                months.forEach((month, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'month-btn';
+                    btn.textContent = month;
+                    btn.onclick = () => updateDashboard(index);
+                    monthSelector.appendChild(btn);
+                });
+                Object.keys(serviceKeys).forEach(key => {
+                    const bar = document.createElement('div');
+                    bar.className = 'chart-bar';
+                    bar.dataset.service = key;
+                    bar.innerHTML = `<div class="tooltip">0 Servicios</div>`;
+                    mainChart.appendChild(bar);
+                    const label = document.createElement('span');
+                    label.textContent = serviceKeys[key];
+                    chartLabels.appendChild(label);
+                });
+                updateDashboard(months.length - 1);
+            }
+            
+            initializeDashboard();
+
+            const chatMessages = document.getElementById('chatMessages');
+            const chatInput = document.getElementById('chatInput');
+            const WHATSAPP_NUMBER = '51906315961';
+
+            const botResponses = {
+                itse: "¡Claro! Te doy información sobre el <strong>Certificado ITSE</strong>.<br><br><strong>Precios Referenciales:</strong><br>• Pago municipalidad: S/ 218.00<br>• Nuestro servicio: S/ 300-500<br><br>El costo final puede variar si requiere planos. ¿Podrías indicarme el rubro de tu negocio?",
+                pozo: "¡Con gusto! Un <strong>Pozo de Tierra</strong> es vital para la seguridad.<br><br><strong>Precio Referencial:</strong><br>• Instalación completa: S/ 1,500 - S/ 2,500<br><br>El precio varía según el terreno. ¿Te gustaría agendar una visita técnica?",
+                mantenimiento: "El <strong>Mantenimiento Eléctrico</strong> preventivo es una inversión inteligente.<br><br><strong>Precios Variables:</strong><br>Nuestros planes son a medida. ¿Cuéntame sobre tu local?",
+                incendios: "Proteger tu negocio contra <strong>incendios</strong> es prioritario.<br><br>El costo depende del área a proteger. ¿Qué tipo de propiedad es?",
+                default: "Para darte la mejor atención, déjanos tu nombre y teléfono. Un experto se pondrá en contacto."
+            };
+
+            window.appendMessage = function(text, sender) {
+                const messageDiv = document.createElement('div');
+                if (sender === 'user') {
+                    messageDiv.className = 'user-message';
+                    messageDiv.innerHTML = `<div><p>${text}</p></div><div>👤</div>`;
+                } else {
+                    messageDiv.className = 'message bot-message';
+                    messageDiv.innerHTML = `<div style="width: 35px; height: 35px; background: #003366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0;">🤖</div><div style="background: white; padding: 15px; border-radius: 15px 15px 15px 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 80%;">${text}</div>`;
+                }
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function triggerBotResponse(userMessageKey) {
+                const response = botResponses[userMessageKey] || botResponses.default;
+                setTimeout(() => {
+                    appendMessage(response, 'bot');
+                }, 1000);
+            }
+
+            window.selectService = function(service) {
+                const serviceTextMap = {
+                    itse: 'Quisiera cotizar un Certificado ITSE',
+                    pozo: 'Necesito información sobre Pozos de Tierra',
+                    mantenimiento: 'Me interesa el Mantenimiento Eléctrico',
+                    incendios: 'Quiero saber más de Sistemas Contra Incendios'
+                };
+                const userMessage = serviceTextMap[service];
+                appendMessage(userMessage, 'user');
+                triggerBotResponse(service);
+            }
+
+            window.sendMessage = function() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    appendMessage(message, 'user');
+                    chatInput.value = '';
+                    let responseKey = 'default';
+                    if (message.toLowerCase().includes('itse')) responseKey = 'itse';
+                    else if (message.toLowerCase().includes('pozo')) responseKey = 'pozo';
+                    else if (message.toLowerCase().includes('mantenimiento')) responseKey = 'mantenimiento';
+                    else if (message.toLowerCase().includes('incendio')) responseKey = 'incendios';
+                    triggerBotResponse(responseKey);
+                }
+            }
+
+            window.handleEnter = function(event) {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            }
+            
+            window.startWhatsAppChat = function() {
+                const defaultMessage = "Hola, vengo de su página web y necesito una cotización.";
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(defaultMessage)}`;
+                window.open(whatsappUrl, '_blank');
+            }
+        });
+    </script>
+</body>
+</html>
