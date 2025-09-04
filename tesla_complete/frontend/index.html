@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TESLA ELECTRICIDAD Y AUTOMATIZACIÓN S.A.C - Energía Inteligente para Huancayo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/chatbot.css">
     <style>
         * {
             margin: 0;
@@ -601,45 +603,22 @@
             <h2 style="text-align: center; color: white; font-size: 2.5rem; margin-bottom: 20px; font-weight: 700;">🤖 TeslaBot - Asistente Inteligente 24/7</h2>
             <p style="text-align: center; color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 50px;">El chatbot más avanzado del sector eléctrico en Perú</p>
             
-            <div class="chatbot-container" style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); overflow: hidden; display: flex; flex-direction: column;">
-                <div class="chat-header" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; padding: 20px; display: flex; align-items: center; gap: 15px;">
-                    <div style="width: 50px; height: 50px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">🤖</div>
-                    <div>
-                        <h3 style="margin: 0; font-size: 1.3rem;">TeslaBot</h3>
-                        <p style="margin: 0; opacity: 0.8; font-size: 0.9rem;">🟢 En línea - Respuesta inmediata</p>
+            <div style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); overflow: hidden; padding: 20px;">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #e94560, #0f3460); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-robot" style="font-size: 36px; color: white;"></i>
                     </div>
+                    <h3 style="color: #003366; margin-bottom: 10px;">TeslaBot</h3>
+                    <p style="color: #666; max-width: 600px; margin: 0 auto;">Asistente virtual especializado en servicios eléctricos. Estoy aquí para responder tus preguntas sobre certificaciones ITSE, instalaciones, mantenimiento y más.</p>
                 </div>
                 
-                <div class="chat-messages" id="chatMessages" style="height: 400px; overflow-y: auto; padding: 20px; background: #f8f9fa; flex-grow: 1;">
-                    <div class="message bot-message" style="display: flex; gap: 10px; margin-bottom: 20px; animation: slideIn 0.5s ease;">
-                        <div style="width: 35px; height: 35px; background: #003366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0;">🤖</div>
-                        <div style="background: white; padding: 15px; border-radius: 15px 15px 15px 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 80%;">
-                            <p style="margin: 0; color: #333;">👋 ¡Hola! Soy <strong>TeslaBot</strong>, tu asistente eléctrico inteligente.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="message bot-message" style="display: flex; gap: 10px; margin-bottom: 20px; animation: slideIn 0.7s ease;">
-                        <div style="width: 35px; height: 35px; background: #003366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0;">⚡</div>
-                        <div style="background: white; padding: 15px; border-radius: 15px 15px 15px 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 80%;">
-                            <p style="margin: 0 0 15px 0; color: #333;">¿Sobre qué servicio te gustaría recibir información y precios referenciales?</p>
-                            <div class="chat-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                                <button onclick="selectService('itse')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">📋 ITSE</button>
-                                <button onclick="selectService('pozo')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">⚡ Pozo Tierra</button>
-                                <button onclick="selectService('mantenimiento')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">🔧 Mantenimiento</button>
-                                <button onclick="selectService('incendios')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">🧯 Contra Incendios</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chat-input-area" style="padding: 20px; background: white; border-top: 1px solid #eee;">
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <input type="text" id="chatInput" placeholder="Escribe tu mensaje aquí..." style="flex: 1; padding: 12px; border: 2px solid #e9ecef; border-radius: 25px; font-size: 1rem; outline: none; transition: border-color 0.3s ease;" onkeypress="handleEnter(event)">
-                        <button onclick="sendMessage()" style="background: #25d366; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.3s ease;">📤</button>
-                    </div>
-                     <div style="text-align: center; margin-top: 10px;">
-                       <button onclick="startWhatsAppChat()" style="background: #25d366; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease;">💬 Continuar en WhatsApp</button>
-                    </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button onclick="window.open('https://wa.me/51906315961?text=Hola%20Tesla%20Electricidad,%20necesito%20información%20sobre%20sus%20servicios', '_blank')" 
+                            style="background: #25d366; color: white; border: none; border-radius: 25px; padding: 12px 30px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; font-size: 1rem; transition: all 0.3s ease; margin: 10px;">
+                        <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i>
+                        Chatear por WhatsApp
+                    </button>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 15px;">O inicia el chat directamente aquí abajo</p>
                 </div>
             </div>
         </div>
@@ -874,5 +853,63 @@
             }
         });
     </script>
+    
+    <!-- Contenedor del Chatbot -->
+    <div id="chat-container" class="minimized">
+        <div class="chat-header" onclick="toggleChat()">
+            <div class="bot-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="bot-info">
+                <h4>TeslaBot</h4>
+                <span class="status online">En línea</span>
+            </div>
+            <button class="chat-minimize">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
+            <button id="send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+        <div class="quick-actions">
+            <button class="quick-btn" data-service="itse">Certificado ITSE</button>
+            <button class="quick-btn" data-service="instalacion">Instalación</button>
+            <button class="quick-btn" data-service="automatizacion">Automatización</button>
+        </div>
+    </div>
+    
+    <script src="js/chatbot.js"></script>
+    <script>
+        // Inicializar el chatbot cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            const teslaBot = new TeslaChatbot();
+            teslaBot.init();
+            
+            // Hacer toggleChat globalmente disponible
+            window.toggleChat = function() {
+                const chatContainer = document.getElementById('chat-container');
+                if (chatContainer) {
+                    chatContainer.classList.toggle('minimized');
+                    const icon = chatContainer.querySelector('.chat-minimize i');
+                    if (icon) {
+                        icon.className = chatContainer.classList.contains('minimized') ? 'fas fa-plus' : 'fas fa-minus';
+                    }
+                }
+            };
+            
+            // Hacer openWhatsApp globalmente disponible
+            window.openWhatsApp = function(phone = '51906315961', message = 'Hola, vengo desde el sitio web de Tesla Electricidad y necesito información.') {
+                const encodedMessage = encodeURIComponent(message);
+                window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+            };
+        });
+    </script>
+    
+    <!-- Cargar el script del chatbot -->
+    <script src="js/chatbot-clean.js"></script>
 </body>
 </html>
