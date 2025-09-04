@@ -1,0 +1,2 @@
+This is a placeholder for the Tesla Electricidad logo.
+Please replace this file with the actual logo image file (tesla-logo.png).

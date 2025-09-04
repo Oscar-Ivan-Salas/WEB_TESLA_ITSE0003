@@ -3,544 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tesla Electricidad - Energia Inteligente</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #1a1a2e;
-            --secondary: #16213e;
-            --accent: #0f3460;
-            --highlight: #e94560;
-            --text: #ffffff;
-            --text-muted: #a0a0a0;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--text);
-            overflow-x: hidden;
-        }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-
-        /* Header */
-        .header {
-            position: fixed; top: 0; width: 100%;
-            backdrop-filter: blur(20px); background: var(--glass);
-            border-bottom: 1px solid var(--glass-border);
-            z-index: 1000; padding: 1rem 0;
-        }
-
-        .header .container { display: flex; justify-content: space-between; align-items: center; }
-
-        .logo {
-            display: flex; align-items: center; gap: 0.5rem;
-            font-size: 1.5rem; font-weight: 700; color: var(--highlight);
-        }
-
-        .nav { display: flex; gap: 2rem; }
-        .nav a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
-        .nav a:hover { color: var(--highlight); }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
-            align-items: center; padding: 6rem 2rem 2rem; gap: 3rem;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text), var(--highlight));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem; color: var(--text-muted);
-            margin-bottom: 2rem; line-height: 1.6;
-        }
-
-        .cta-btn {
-            background: linear-gradient(135deg, var(--highlight), #ff6b6b);
-            color: white; border: none; padding: 1rem 2rem; border-radius: 50px;
-            font-size: 1.1rem; font-weight: 600; cursor: pointer;
-            transition: all 0.3s ease; display: inline-flex;
-            align-items: center; gap: 0.5rem;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
-        }
-
-        /* Dashboard */
-        .dashboard-section { padding: 6rem 2rem; }
-        .dashboard-section h2 { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; }
-
-        .month-selector {
-            display: flex; justify-content: center; gap: 0.5rem;
-            margin-bottom: 3rem; flex-wrap: wrap;
-        }
-
-        .month-btn {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            color: var(--text); padding: 0.5rem 1rem; border-radius: 25px;
-            cursor: pointer; transition: all 0.3s ease;
-        }
-
-        .month-btn.active { background: var(--highlight); border-color: var(--highlight); }
-
-        .metrics-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;
-        }
-
-        .metric-card {
-            background: var(--glass); backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 20px;
-            padding: 2rem; text-align: center; transition: transform 0.3s ease;
-        }
-
-        .metric-card:hover { transform: translateY(-5px); }
-        .metric-card i { font-size: 3rem; color: var(--highlight); margin-bottom: 1rem; }
-        .metric-card .value { font-size: 2.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
-
-        /* Services */
-        .services-section { padding: 6rem 2rem; background: rgba(0, 0, 0, 0.2); }
-        .services-section h2 { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; }
-
-        .services-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
-        }
-
-        .service-card {
-            background: var(--glass); backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 20px;
-            padding: 2rem; transition: all 0.3s ease;
-        }
-
-        .service-card:hover { transform: translateY(-10px); }
-
-        .service-gallery {
-            display: grid; grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr); gap: 8px;
-            margin: 0 auto 25px; width: 240px; height: 200px;
-        }
-
-        .service-photo {
-            border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--highlight));
-            border: 2px solid var(--accent); transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 2rem; color: white;
-        }
-
-        .service-photo:hover { transform: scale(1.05); border-color: var(--highlight); }
-        .service-photo:nth-child(1) { grid-column: 1 / 2; grid-row: 1 / 3; }
-        .service-photo:nth-child(2) { grid-column: 2 / 3; grid-row: 1 / 2; }
-        .service-photo:nth-child(3) { grid-column: 2 / 3; grid-row: 2 / 3; }
-
-        .service-card h3 { color: var(--text); font-size: 1.3rem; margin-bottom: 15px; }
-        .service-card p { color: var(--text-muted); line-height: 1.6; }
-
-        /* Chatbot */
-        .chatbot-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; }
-
-        .chatbot-toggle {
-            width: 60px; height: 60px; background: linear-gradient(135deg, var(--highlight), #ff6b6b);
-            border: none; border-radius: 50%; color: white; font-size: 1.5rem;
-            cursor: pointer; box-shadow: 0 5px 20px rgba(233, 69, 96, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .chatbot-toggle:hover { transform: scale(1.1); }
-
-        .chatbot-window {
-            position: absolute; bottom: 80px; right: 0; width: 400px; height: 500px;
-            background: var(--glass); backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 20px;
-            display: none; flex-direction: column; overflow: hidden;
-        }
-
-        .chatbot-window.open { display: flex; }
-
-        .chatbot-header {
-            background: linear-gradient(135deg, var(--highlight), #ff6b6b);
-            padding: 1rem; display: flex; align-items: center; gap: 1rem;
-        }
-
-        .chatbot-messages {
-            flex: 1; padding: 1rem; overflow-y: auto;
-            display: flex; flex-direction: column; gap: 1rem;
-        }
-
-        .message { display: flex; gap: 0.5rem; }
-        .message.bot { justify-content: flex-start; }
-        .message.user { justify-content: flex-end; }
-
-        .message-bubble {
-            max-width: 80%; padding: 0.75rem 1rem; border-radius: 15px;
-            font-size: 0.9rem; line-height: 1.4;
-        }
-
-        .message.bot .message-bubble { background: rgba(255, 255, 255, 0.1); }
-        .message.user .message-bubble { background: var(--highlight); color: white; }
-
-        .quick-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
-
-        .quick-btn {
-            background: rgba(233, 69, 96, 0.2); border: 1px solid var(--highlight);
-            color: var(--highlight); padding: 0.5rem 0.75rem; border-radius: 15px;
-            font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;
-        }
-
-        .quick-btn:hover { background: var(--highlight); color: white; }
-
-        .chatbot-input {
-            padding: 1rem; display: flex; gap: 0.5rem;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .chatbot-input input {
-            flex: 1; background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--glass-border); border-radius: 25px;
-            padding: 0.75rem 1rem; color: var(--text); outline: none;
-        }
-
-        .chatbot-input button {
-            background: var(--highlight); border: none; border-radius: 50%;
-            width: 45px; height: 45px; color: white; cursor: pointer;
-        }
-
-        /* WhatsApp */
-        .whatsapp-float {
-            position: fixed; bottom: 2rem; left: 2rem; width: 60px; height: 60px;
-            background: #25d366; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; color: white;
-            font-size: 1.5rem; text-decoration: none; z-index: 999;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .nav { display: none; }
-        }
-    </style>
-</head>
-<body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <i class="fas fa-bolt"></i>
-                Tesla Electricidad
-            </div>
-            <nav class="nav">
-                <a href="#inicio">Inicio</a>
-                <a href="#servicios">Servicios</a>
-                <a href="#dashboard">Dashboard</a>
-            </nav>
-        </div>
-    </header>
-
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1>Energia Inteligente para Huancayo</h1>
-            <p>Especialistas en instalaciones electricas, automatizacion y certificaciones ITSE</p>
-            <button class="cta-btn" onclick="openChat()">
-                <i class="fas fa-robot"></i>
-                Cotizar con IA
-            </button>
-        </div>
-    </section>
-
-    <section id="dashboard" class="dashboard-section">
-        <div class="container">
-            <h2>Nuestro Rendimiento 2024</h2>
-            <div class="month-selector">
-                <button class="month-btn" data-month="1">Ene</button>
-                <button class="month-btn" data-month="2">Feb</button>
-                <button class="month-btn" data-month="3">Mar</button>
-                <button class="month-btn" data-month="4">Abr</button>
-                <button class="month-btn" data-month="5">May</button>
-                <button class="month-btn" data-month="6">Jun</button>
-                <button class="month-btn" data-month="7">Jul</button>
-                <button class="month-btn active" data-month="8">Ago</button>
-            </div>
-            <div class="metrics-grid" id="metricsGrid"></div>
-        </div>
-    </section>
-
-    <section id="servicios" class="services-section">
-        <div class="container">
-            <h2>Servicios Especializados</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-gallery">
-                        <div class="service-photo"><i class="fas fa-certificate"></i></div>
-                        <div class="service-photo"><i class="fas fa-file-alt"></i></div>
-                        <div class="service-photo"><i class="fas fa-check-circle"></i></div>
-                    </div>
-                    <h3>Certificado ITSE</h3>
-                    <p>Gestion completa para la Inspeccion Tecnica de Seguridad en Edificaciones</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-gallery">
-                        <div class="service-photo"><i class="fas fa-plug"></i></div>
-                        <div class="service-photo"><i class="fas fa-tools"></i></div>
-                        <div class="service-photo"><i class="fas fa-shield-alt"></i></div>
-                    </div>
-                    <h3>Pozo de Tierra</h3>
-                    <p>Instalacion y mantenimiento de sistemas de puesta a tierra</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-gallery">
-                        <div class="service-photo"><i class="fas fa-wrench"></i></div>
-                        <div class="service-photo"><i class="fas fa-cogs"></i></div>
-                        <div class="service-photo"><i class="fas fa-battery-full"></i></div>
-                    </div>
-                    <h3>Mantenimiento Electrico</h3>
-                    <p>Mantenimiento preventivo y correctivo para instalaciones</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-gallery">
-                        <div class="service-photo"><i class="fas fa-fire-extinguisher"></i></div>
-                        <div class="service-photo"><i class="fas fa-exclamation-triangle"></i></div>
-                        <div class="service-photo"><i class="fas fa-bell"></i></div>
-                    </div>
-                    <h3>Sistema Contra Incendios</h3>
-                    <p>Diseno e instalacion de sistemas de deteccion</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="chatbot-container">
-        <button class="chatbot-toggle" onclick="toggleChat()">
-            <i class="fas fa-robot"></i>
-        </button>
-        <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                <h4>Tesla IA</h4>
-                <button onclick="closeChat()" style="background: none; border: none; color: white;">×</button>
-            </div>
-            <div class="chatbot-messages" id="chatMessages">
-                <div class="message bot">
-                    <div class="message-bubble">
-                        Hola! Soy Tesla IA. En que puedo ayudarte?
-                        <div class="quick-actions">
-                            <button class="quick-btn" onclick="sendQuickMessage('ITSE')">ITSE</button>
-                            <button class="quick-btn" onclick="sendQuickMessage('Pozo')">Pozo</button>
-                            <button class="quick-btn" onclick="sendQuickMessage('Precios')">Precios</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="messageInput" placeholder="Escribe tu mensaje...">
-                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <a href="https://wa.me/51906315961" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <script>
-        const API_URL = 'http://localhost:8000';
-        let apiOnline = false;
-
-        const dashboardData = {
-            1: {itse: 15, pozo_tierra: 8, mantenimiento: 12, incendios: 5, clientes: 25, satisfaccion: 95},
-            2: {itse: 18, pozo_tierra: 10, mantenimiento: 15, incendios: 7, clientes: 28, satisfaccion: 96},
-            3: {itse: 22, pozo_tierra: 12, mantenimiento: 18, incendios: 8, clientes: 32, satisfaccion: 97},
-            4: {itse: 25, pozo_tierra: 14, mantenimiento: 20, incendios: 10, clientes: 35, satisfaccion: 96},
-            5: {itse: 28, pozo_tierra: 16, mantenimiento: 22, incendios: 12, clientes: 38, satisfaccion: 98},
-            6: {itse: 32, pozo_tierra: 18, mantenimiento: 25, incendios: 14, clientes: 42, satisfaccion: 97},
-            7: {itse: 35, pozo_tierra: 20, mantenimiento: 28, incendios: 16, clientes: 45, satisfaccion: 98},
-            8: {itse: 38, pozo_tierra: 22, mantenimiento: 30, incendios: 18, clientes: 48, satisfaccion: 99}
-        };
-
-        document.addEventListener('DOMContentLoaded', function() {
-            initDashboard();
-        });
-
-        function initDashboard() {
-            createMetricsGrid();
-            loadDashboardData(8);
-            
-            document.querySelectorAll('.month-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const month = parseInt(e.target.dataset.month);
-                    selectMonth(month);
-                });
-            });
-        }
-
-        function createMetricsGrid() {
-            const grid = document.getElementById('metricsGrid');
-            if (!grid) return;
-            
-            const metrics = [
-                {id: 'itse', icon: 'fas fa-certificate', label: 'Certificados ITSE'},
-                {id: 'pozo_tierra', icon: 'fas fa-plug', label: 'Pozos de Tierra'},
-                {id: 'mantenimiento', icon: 'fas fa-tools', label: 'Mantenimientos'},
-                {id: 'incendios', icon: 'fas fa-fire-extinguisher', label: 'Sistemas C.I.'},
-                {id: 'clientes', icon: 'fas fa-users', label: 'Clientes Nuevos'},
-                {id: 'satisfaccion', icon: 'fas fa-star', label: 'Satisfaccion'}
-            ];
-            
-            grid.innerHTML = metrics.map(metric => 
-                '<div class="metric-card">' +
-                '<i class="' + metric.icon + '"></i>' +
-                '<div class="value" id="metric-' + metric.id + '">0</div>' +
-                '<div class="label">' + metric.label + '</div>' +
-                '</div>'
-            ).join('');
-        }
-
-        function selectMonth(month) {
-            document.querySelectorAll('.month-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('[data-month="' + month + '"]').classList.add('active');
-            loadDashboardData(month);
-        }
-
-        function loadDashboardData(month) {
-            const data = dashboardData[month];
-            Object.keys(data).forEach(key => {
-                const element = document.getElementById('metric-' + key);
-                if (element) {
-                    const suffix = key === 'satisfaccion' ? '%' : '';
-                    animateValue(element, 0, data[key], suffix);
-                }
-            });
-        }
-
-        function animateValue(element, start, end, suffix) {
-            const duration = 1000;
-            const startTime = performance.now();
-            
-            function animate(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const current = Math.floor(start + (end - start) * progress);
-                element.textContent = current + (suffix || '');
-                
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                }
-            }
-            
-            requestAnimationFrame(animate);
-        }
-
-        function toggleChat() {
-            document.getElementById('chatbotWindow').classList.toggle('open');
-        }
-
-        function openChat() {
-            document.getElementById('chatbotWindow').classList.add('open');
-        }
-
-        function closeChat() {
-            document.getElementById('chatbotWindow').classList.remove('open');
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('messageInput');
-            const message = input.value.trim();
-            if (!message) return;
-            
-            addMessage('user', message);
-            input.value = '';
-            processMessage(message);
-        }
-
-        function sendQuickMessage(message) {
-            addMessage('user', message);
-            processMessage(message);
-        }
-
-        function processMessage(message) {
-            setTimeout(() => addMessage('bot', getLocalResponse(message)), 1000);
-        }
-
-        function getLocalResponse(message) {
-            const lower = message.toLowerCase();
-            
-            if (lower.includes('itse') || lower.includes('certificado')) {
-                return 'CERTIFICADO ITSE<br><br>' +
-                       'Costos:<br>' +
-                       '• Municipalidad: S/ 218<br>' +
-                       '• Nuestro servicio: S/ 300-500<br>' +
-                       '• Total: S/ 518-718<br><br>' +
-                       'Tiempo: 5-10 dias<br>' +
-                       'WhatsApp: +51 906 315 961';
-            }
-            
-            if (lower.includes('pozo') || lower.includes('tierra')) {
-                return 'POZO DE TIERRA<br><br>' +
-                       'Precio: S/ 1,500 - 2,500<br><br>' +
-                       'Varia segun tipo de terreno<br>' +
-                       'Visita tecnica gratuita<br>' +
-                       'WhatsApp: +51 906 315 961';
-            }
-            
-            if (lower.includes('precio')) {
-                return 'PRECIOS REFERENCIALES 2024<br><br>' +
-                       'ITSE: S/ 518 - 1,218<br>' +
-                       'Pozo Tierra: S/ 1,500 - 2,500<br>' +
-                       'Mantenimiento: S/ 200 - 1,200<br>' +
-                       'Contra Incendios: Desde S/ 1,500<br><br>' +
-                       'WhatsApp: +51 906 315 961';
-            }
-            
-            return 'Soy Tesla IA, especialista en servicios electricos.<br><br>' +
-                   'Sobre que necesitas informacion?<br>' +
-                   '• Certificado ITSE<br>' +
-                   '• Pozo de Tierra<br>' +
-                   '• Mantenimiento<br>' +
-                   '• Sistema Contra Incendios<br><br>' +
-                   'WhatsApp: +51 906 315 961';
-        }
-
-        function addMessage(sender, content) {
-            const messages = document.getElementById('chatMessages');
-            const div = document.createElement('div');
-            div.className = 'message ' + sender;
-            const bubble = document.createElement('div');
-            bubble.className = 'message-bubble';
-            bubble.innerHTML = content;
-            div.appendChild(bubble);
-            messages.appendChild(div);
-            messages.scrollTop = messages.scrollHeight;
-        }
-    </script>
-</body>
-</html>
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TESLA ELECTRICIDAD Y AUTOMATIZACIÓN S.A.C - Energía Inteligente para Huancayo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/chatbot.css">
     <style>
         * {
             margin: 0;
@@ -1137,22 +601,45 @@
             <h2 style="text-align: center; color: white; font-size: 2.5rem; margin-bottom: 20px; font-weight: 700;">🤖 TeslaBot - Asistente Inteligente 24/7</h2>
             <p style="text-align: center; color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 50px;">El chatbot más avanzado del sector eléctrico en Perú</p>
             
-            <div style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); overflow: hidden; padding: 20px;">
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #e94560, #0f3460); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-robot" style="font-size: 36px; color: white;"></i>
+            <div class="chatbot-container" style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); overflow: hidden; display: flex; flex-direction: column;">
+                <div class="chat-header" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; padding: 20px; display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">🤖</div>
+                    <div>
+                        <h3 style="margin: 0; font-size: 1.3rem;">TeslaBot</h3>
+                        <p style="margin: 0; opacity: 0.8; font-size: 0.9rem;">🟢 En línea - Respuesta inmediata</p>
                     </div>
-                    <h3 style="color: #003366; margin-bottom: 10px;">TeslaBot</h3>
-                    <p style="color: #666; max-width: 600px; margin: 0 auto;">Asistente virtual especializado en servicios eléctricos. Estoy aquí para responder tus preguntas sobre certificaciones ITSE, instalaciones, mantenimiento y más.</p>
                 </div>
                 
-                <div style="text-align: center; margin-top: 30px;">
-                    <button onclick="window.open('https://wa.me/51906315961?text=Hola%20Tesla%20Electricidad,%20necesito%20información%20sobre%20sus%20servicios', '_blank')" 
-                            style="background: #25d366; color: white; border: none; border-radius: 25px; padding: 12px 30px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; font-size: 1rem; transition: all 0.3s ease; margin: 10px;">
-                        <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i>
-                        Chatear por WhatsApp
-                    </button>
-                    <p style="color: #666; font-size: 0.9rem; margin-top: 15px;">O inicia el chat directamente aquí abajo</p>
+                <div class="chat-messages" id="chatMessages" style="height: 400px; overflow-y: auto; padding: 20px; background: #f8f9fa; flex-grow: 1;">
+                    <div class="message bot-message" style="display: flex; gap: 10px; margin-bottom: 20px; animation: slideIn 0.5s ease;">
+                        <div style="width: 35px; height: 35px; background: #003366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0;">🤖</div>
+                        <div style="background: white; padding: 15px; border-radius: 15px 15px 15px 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 80%;">
+                            <p style="margin: 0; color: #333;">👋 ¡Hola! Soy <strong>TeslaBot</strong>, tu asistente eléctrico inteligente.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="message bot-message" style="display: flex; gap: 10px; margin-bottom: 20px; animation: slideIn 0.7s ease;">
+                        <div style="width: 35px; height: 35px; background: #003366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0;">⚡</div>
+                        <div style="background: white; padding: 15px; border-radius: 15px 15px 15px 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 80%;">
+                            <p style="margin: 0 0 15px 0; color: #333;">¿Sobre qué servicio te gustaría recibir información y precios referenciales?</p>
+                            <div class="chat-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+                                <button onclick="selectService('itse')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">📋 ITSE</button>
+                                <button onclick="selectService('pozo')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">⚡ Pozo Tierra</button>
+                                <button onclick="selectService('mantenimiento')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">🔧 Mantenimiento</button>
+                                <button onclick="selectService('incendios')" style="background: linear-gradient(135deg, #003366, #0066cc); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 600;">🧯 Contra Incendios</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-area" style="padding: 20px; background: white; border-top: 1px solid #eee;">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="text" id="chatInput" placeholder="Escribe tu mensaje aquí..." style="flex: 1; padding: 12px; border: 2px solid #e9ecef; border-radius: 25px; font-size: 1rem; outline: none; transition: border-color 0.3s ease;" onkeypress="handleEnter(event)">
+                        <button onclick="sendMessage()" style="background: #25d366; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.3s ease;">📤</button>
+                    </div>
+                     <div style="text-align: center; margin-top: 10px;">
+                       <button onclick="startWhatsAppChat()" style="background: #25d366; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease;">💬 Continuar en WhatsApp</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1163,38 +650,36 @@
         <div class="container">
             <h2>Solicita tu Cotización</h2>
             <div class="contact-form">
-                <form id="contact-form" method="POST">
+                <form action="#" method="POST">
                     <div class="form-group">
-                        <label for="nombre">Nombre Completo</label>
-                        <input type="text" id="nombre" name="nombre" required>
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Correo Electrónico</label>
-                        <input type="email" id="email" name="email">
+                        <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="telefono">Teléfono / WhatsApp</label>
-                        <input type="tel" id="telefono" name="telefono" required>
+                        <label for="phone">Teléfono / WhatsApp</label>
+                        <input type="tel" id="phone" name="phone" required>
                     </div>
                     <div class="form-group">
-                        <label for="servicio">Servicio de Interés</label>
-                        <select id="servicio" name="servicio" required>
-                            <option value="">Seleccione un servicio</option>
-                            <option value="Certificado ITSE">Certificado ITSE</option>
-                            <option value="Pozo de Tierra">Pozo de Tierra</option>
-                            <option value="Mantenimiento Eléctrico">Mantenimiento Eléctrico</option>
-                            <option value="Sistema Contra Incendios">Sistema Contra Incendios</option>
-                            <option value="Otro">Otro</option>
+                        <label for="service">Servicio de Interés</label>
+                        <select id="service" name="service">
+                            <option value="itse">Certificado ITSE</option>
+                            <option value="pozo_tierra">Pozo de Tierra</option>
+                            <option value="mantenimiento">Mantenimiento Eléctrico</option>
+                            <option value="incendios">Sistema Contra Incendios</option>
+                            <option value="tableros">Diseño de Tableros</option>
+                            <option value="suministros">Venta de Suministros</option>
+                            <option value="otro">Otro</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="mensaje">Mensaje</label>
-                        <textarea id="mensaje" name="mensaje" placeholder="Describa brevemente su requerimiento"></textarea>
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">
-                        <span class="btn-text">Enviar Cotización</span>
-                        <span class="spinner" style="display: none;">Procesando...</span>
-                    </button>
+                    <button type="submit" class="submit-btn">Enviar Cotización</button>
                 </form>
             </div>
         </div>
@@ -1239,6 +724,8 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // --- START: New Dynamic Dashboard Logic ---
+
             const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago"];
             const fullMonthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto"];
             const serviceKeys = {
@@ -1249,14 +736,14 @@
             };
 
             const monthlyData = [
-                { clients: 5, satisfaction: 92, services: { itse: 2, pozo: 3, mant: 10, inc: 1 } },
-                { clients: 6, satisfaction: 93, services: { itse: 3, pozo: 4, mant: 11, inc: 2 } },
-                { clients: 8, satisfaction: 94, services: { itse: 4, pozo: 5, mant: 14, inc: 2 } },
-                { clients: 7, satisfaction: 95, services: { itse: 5, pozo: 5, mant: 15, inc: 3 } },
-                { clients: 8, satisfaction: 95, services: { itse: 6, pozo: 3, mant: 15, inc: 4 } },
-                { clients: 10, satisfaction: 96, services: { itse: 7, pozo: 6, mant: 18, inc: 5 } },
-                { clients: 12, satisfaction: 97, services: { itse: 8, pozo: 7, mant: 20, inc: 7 } },
-                { clients: 15, satisfaction: 98, services: { itse: 9, pozo: 8, mant: 22, inc: 8 } },
+                { clients: 5, satisfaction: 92, services: { itse: 2, pozo: 3, mant: 10, inc: 1 } }, // Ene
+                { clients: 6, satisfaction: 93, services: { itse: 3, pozo: 4, mant: 11, inc: 2 } }, // Feb
+                { clients: 8, satisfaction: 94, services: { itse: 4, pozo: 5, mant: 14, inc: 2 } }, // Mar
+                { clients: 7, satisfaction: 95, services: { itse: 5, pozo: 5, mant: 15, inc: 3 } }, // Abr
+                { clients: 8, satisfaction: 95, services: { itse: 6, pozo: 3, mant: 15, inc: 4 } }, // May
+                { clients: 10, satisfaction: 96, services: { itse: 7, pozo: 6, mant: 18, inc: 5 } }, // Jun
+                { clients: 12, satisfaction: 97, services: { itse: 8, pozo: 7, mant: 20, inc: 7 } }, // Jul
+                { clients: 15, satisfaction: 98, services: { itse: 9, pozo: 8, mant: 22, inc: 8 } }, // Ago
             ];
 
             const monthSelector = document.getElementById('monthSelector');
@@ -1317,17 +804,20 @@
             }
             
             initializeDashboard();
+            // --- END: New Dynamic Dashboard Logic ---
 
+
+            // --- START: Updated Chatbot Logic with Pricing ---
             const chatMessages = document.getElementById('chatMessages');
             const chatInput = document.getElementById('chatInput');
             const WHATSAPP_NUMBER = '51906315961';
 
             const botResponses = {
-                itse: "¡Claro! Te doy información sobre el <strong>Certificado ITSE</strong>.<br><br><strong>Precios Referenciales:</strong><br>• Pago municipalidad: S/ 218.00<br>• Nuestro servicio: S/ 300-500<br><br>El costo final puede variar si requiere planos. ¿Podrías indicarme el rubro de tu negocio?",
-                pozo: "¡Con gusto! Un <strong>Pozo de Tierra</strong> es vital para la seguridad.<br><br><strong>Precio Referencial:</strong><br>• Instalación completa: S/ 1,500 - S/ 2,500<br><br>El precio varía según el terreno. ¿Te gustaría agendar una visita técnica?",
-                mantenimiento: "El <strong>Mantenimiento Eléctrico</strong> preventivo es una inversión inteligente.<br><br><strong>Precios Variables:</strong><br>Nuestros planes son a medida. ¿Cuéntame sobre tu local?",
-                incendios: "Proteger tu negocio contra <strong>incendios</strong> es prioritario.<br><br>El costo depende del área a proteger. ¿Qué tipo de propiedad es?",
-                default: "Para darte la mejor atención, déjanos tu nombre y teléfono. Un experto se pondrá en contacto."
+                itse: "¡Claro! Te doy la información sobre el <strong>Certificado ITSE</strong>.<br><br><strong>Precios Referenciales:</strong><br>• Pago a la municipalidad: S/ 218.00<br>• Nuestro servicio de gestión: Desde S/ 300.00<br><br><em><small>El costo final puede variar si se requieren planos. Para darte una cotización exacta, ¿podrías indicarme el rubro de tu negocio?</small></em>",
+                pozo: "¡Con gusto! Un <strong>Pozo de Tierra</strong> es vital para la seguridad.<br><br><strong>Precio Referencial:</strong><br>• Instalación completa: S/ 1,500 - S/ 2,500<br><br><em><small>El precio varía según el terreno. Para darte un costo exacto, necesitamos hacer una visita técnica. ¿Te gustaría agendar una?</small></em>",
+                mantenimiento: "El <strong>Mantenimiento Eléctrico</strong> preventivo es una inversión inteligente.<br><br><strong>Precios Variables:</strong><br>Nuestros planes son a medida. Cotizamos según la complejidad y tamaño de tus instalaciones.<br><br><em><small>Para darte una propuesta, cuéntame un poco más sobre tu local o déjanos tu número y un especialista te llamará.</small></em>",
+                incendios: "Proteger tu negocio contra <strong>incendios</strong> es nuestra prioridad.<br><br><strong>Precios Variables:</strong><br>El costo depende del área a proteger y el tipo de sistema que necesites (detectores, alarmas, etc.).<br><br><em><small>¿Qué tipo de propiedad es? Con esa información podemos darte un estimado inicial.</small></em>",
+                default: "Entendido. Para darte la mejor atención, por favor déjanos tu nombre y número de teléfono. Un experto se pondrá en contacto contigo a la brevedad."
             };
 
             window.appendMessage = function(text, sender) {
@@ -1387,155 +877,9 @@
                 const whatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(defaultMessage)}`;
                 window.open(whatsappUrl, '_blank');
             }
+             // --- END: Updated Chatbot Logic ---
         });
     </script>
-    
-    <!-- Contenedor del Chatbot -->
-    <div id="chat-container" class="minimized">
-        <div class="chat-header" onclick="toggleChat()">
-            <div class="bot-avatar">
-                <i class="fas fa-robot"></i>
-            </div>
-            <div class="bot-info">
-                <h4>TeslaBot</h4>
-                <span class="status online">En línea</span>
-            </div>
-            <button class="chat-minimize">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
-        <div class="chat-messages" id="chat-messages"></div>
-        <div class="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
-            <button id="send-btn">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-        <div class="quick-actions">
-            <button class="quick-btn" data-service="itse">Certificado ITSE</button>
-            <button class="quick-btn" data-service="instalacion">Instalación</button>
-            <button class="quick-btn" data-service="automatizacion">Automatización</button>
-        </div>
-    </div>
-    
-    <script src="js/chatbot.js"></script>
-    <script>
-        // Inicializar el chatbot cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', function() {
-            const teslaBot = new TeslaChatbot();
-            teslaBot.init();
-            
-            // Hacer toggleChat globalmente disponible
-            window.toggleChat = function() {
-                const chatContainer = document.getElementById('chat-container');
-                if (chatContainer) {
-                    chatContainer.classList.toggle('minimized');
-                    const icon = chatContainer.querySelector('.chat-minimize i');
-                    if (icon) {
-                        icon.className = chatContainer.classList.contains('minimized') ? 'fas fa-plus' : 'fas fa-minus';
-                    }
-                }
-            };
-            
-            // Hacer openWhatsApp globalmente disponible
-            window.openWhatsApp = function(phone = '51906315961', message = 'Hola, vengo desde el sitio web de Tesla Electricidad y necesito información.') {
-                const encodedMessage = encodeURIComponent(message);
-                window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
-            };
-        });
-    </script>
-    
-    <!-- Cargar los scripts -->
-    <script src="js/automation.js"></script>
-    <script src="js/chatbot-clean.js"></script>
-    
-    <style>
-        /* Estilos para los mensajes de éxito/error */
-        .success-message, .error-message-global {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 15px 25px;
-            border-radius: 8px;
-            color: white;
-            z-index: 1000;
-            max-width: 90%;
-            width: 400px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            animation: slideDown 0.3s ease-out;
-        }
-        
-        .success-message {
-            background: #28a745;
-        }
-        
-        .error-message-global {
-            background: #dc3545;
-        }
-        
-        .success-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-        
-        .btn-close-message {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            margin-top: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn-close-message:hover {
-            background: rgba(255,255,255,0.3);
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translate(-50%, -30px); }
-            to { opacity: 1; transform: translate(-50%, 0); }
-        }
-        
-        /* Estilos para campos con error */
-        .form-group input.error,
-        .form-group select.error,
-        .form-group textarea.error {
-            border: 2px solid #dc3545 !important;
-        }
-        
-        .form-group .error-message {
-            color: #dc3545;
-            font-size: 0.85rem;
-            margin-top: 5px;
-            display: block;
-        }
-        
-        /* Estilos para el botón de envío */
-        .submit-btn {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .submit-btn .spinner {
-            display: none;
-        }
-        
-        .submit-btn.loading .btn-text {
-            visibility: hidden;
-        }
-        
-        .submit-btn.loading .spinner {
-            display: block;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-    </style>
 </body>
 </html>
+
